@@ -11,14 +11,26 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // getter method
     },
     username: {
         type: String,
         required: true,
     },
-    reactions: [reactionSchema],
+    reactions: [reactionSchema]
+},
+    // getter method
+{
+    toJSON: {
+      getters: true,
+    },
+    id: false,
+  }
+);
+
+thoughtSchema.virtual('reactionCount').get(function (){
+return this.reactions.length;
 });
+
 
 const Thought = model("Thought", thoughtSchema);
 module.exports = Thought;

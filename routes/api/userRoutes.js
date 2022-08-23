@@ -17,14 +17,58 @@ router.get("/:id", (req, res) => {
     })
 });
 
-// create new User
+// create NEW User
 router.post("/", (req, res) => {
     User.create(req.body).then((results)=> {
         res.json(results);
     })
 });
 
-// router.put();
-// router.delete();
+// update User
+router.put("/:id", (req, res) => {
+    User.findOne({
+        _id: req.params.id
+    }).then((results)=> {
+        res.json(results);
+    })
+});
+
+// delete User
+router.delete("/:id", (req, res) => {
+    User.create(req.body).then((results)=> {
+        res.json(results);
+    })
+});
 
 module.exports = router;
+
+
+// const router = require('express').Router();
+// // const User = require("../../models/users");
+// const {
+//     getUsers,
+//     getSingleUser,
+//     createUser,
+//     updateUser,
+//     deleteUser,
+//     addFriend,
+//     deleteFriend,
+// } = require('../../controllers/userController');
+
+// // /api/users
+// router.route('/').get(getUsers).post(createUser);
+
+// // /api/users/:userId
+// router
+//     .route('/:userId')
+//     .put(updateUser)
+//     .get(getSingleUser)
+//     .delete(deleteUser);
+
+// // /api/users/:userId/friends/:friendId
+// router
+//     .route('/:userId/friends/:friendId')
+//     .post(addFriend)
+//     .delete(deleteFriend);
+
+// module.exports = router;
