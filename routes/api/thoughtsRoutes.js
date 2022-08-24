@@ -48,7 +48,7 @@ router
     .route('/:thoughtId')
     // .get(getSingleThought)
     .put(updateThought)
-    .delete(deleteThought)
+    // .delete(deleteThought)
 
 // delete Thought
 router.delete("/:id", (req, res) => {
@@ -56,6 +56,15 @@ router.delete("/:id", (req, res) => {
         res.json(results);
     })
 });
+
+// /api/thoughts/:thoughtId/reactions
+router
+    .route('/:thoughtId/reactions')
+    .post(createReaction)
+
+router
+    .route('/:thoughtId/reactions/:reactionId')
+    .delete(deleteReaction);
 
 module.exports = router;
 

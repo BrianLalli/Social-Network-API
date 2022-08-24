@@ -47,8 +47,15 @@ router.post("/", (req, res) => {
 router
     .route('/:userId')
     .put(updateUser)
-    .get(getSingleUser)
-    .delete(deleteUser);
+    // .get(getSingleUser)
+    // .delete(deleteUser);
+
+// /api/users/:userId/friends/:friendId
+router
+    .route('/:userId/friends/:friendId')
+    .post(addFriend)
+    .delete(deleteFriend);
+
 
 // delete User
 router.delete("/:id", (req, res) => {

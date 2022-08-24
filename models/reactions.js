@@ -20,7 +20,6 @@ const reactionSchema = new Schema(
             default: Date.now,
           },
     },
-      // getter method
     {
         toJSON: {
           getters: true,
