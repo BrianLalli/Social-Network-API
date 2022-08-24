@@ -1,6 +1,16 @@
 const router = require("express").Router();
 const User = require("../../models/users");
 
+const {
+    getUsers,
+    getSingleUser,
+    createUser,
+    updateUser,
+    deleteUser,
+    addFriend,
+    deleteFriend,
+} = require('../../controllers/userController');
+
 // get ALL route
 router.get("/", (req, res) => {
     User.find().then((results)=> {
@@ -24,14 +34,21 @@ router.post("/", (req, res) => {
     })
 });
 
-// update User
-router.put("/:id", (req, res) => {
-    User.findOne({
-        _id: req.params.id
-    }).then((results)=> {
-        res.json(results);
-    })
-});
+// // update User
+// router.put("/:id", (req, res) => {
+//     User.findOne({
+//         _id: req.params.id
+//     }).then((results)=> {
+//         res.json(results);
+//     })
+// });
+
+// /api/users/:userId
+router
+    .route('/:userId')
+    .put(updateUser)
+    .get(getSingleUser)
+    .delete(deleteUser);
 
 // delete User
 router.delete("/:id", (req, res) => {
@@ -43,32 +60,3 @@ router.delete("/:id", (req, res) => {
 module.exports = router;
 
 
-// const router = require('express').Router();
-// // const User = require("../../models/users");
-// const {
-//     getUsers,
-//     getSingleUser,
-//     createUser,
-//     updateUser,
-//     deleteUser,
-//     addFriend,
-//     deleteFriend,
-// } = require('../../controllers/userController');
-
-// // /api/users
-// router.route('/').get(getUsers).post(createUser);
-
-// // /api/users/:userId
-// router
-//     .route('/:userId')
-//     .put(updateUser)
-//     .get(getSingleUser)
-//     .delete(deleteUser);
-
-// // /api/users/:userId/friends/:friendId
-// router
-//     .route('/:userId/friends/:friendId')
-//     .post(addFriend)
-//     .delete(deleteFriend);
-
-// module.exports = router;
