@@ -48,7 +48,7 @@ router
     .route('/:userId')
     .put(updateUser)
     // .get(getSingleUser)
-    // .delete(deleteUser);
+    .delete(deleteUser);
 
 // /api/users/:userId/friends/:friendId
 router
@@ -58,11 +58,11 @@ router
 
 
 // delete User
-router.delete("/:id", (req, res) => {
-    User.create(req.body).then((results)=> {
-        res.json(results);
-    })
-});
+// router.delete("/:id", (req, res) => {
+//     User.create(req.body).then((results)=> {
+//         res.json(results);
+//     })
+// });
 
 module.exports = router;
 

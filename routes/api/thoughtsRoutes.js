@@ -57,6 +57,12 @@ router.delete("/:id", (req, res) => {
     })
 });
 
+router.delete("/:id", (req, res) => {
+    Reaction.create(req.body).then((results)=> {
+        res.json(results);
+    })
+});
+
 // /api/thoughts/:thoughtId/reactions
 router
     .route('/:thoughtId/reactions')
@@ -67,5 +73,3 @@ router
     .delete(deleteReaction);
 
 module.exports = router;
-
-

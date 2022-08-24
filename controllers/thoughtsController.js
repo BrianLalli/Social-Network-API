@@ -29,9 +29,23 @@ module.exports = {
               });
     },
     // Create new thought
-    createThought(req,res) {
-        Thought.create(req.body)
-          .then((thought) => res.json(thought))
+    createThought({params, body}, res) {
+        console.log(params)
+        Thought.create(body)
+          .then(({_id}) => {
+              return User.findOneAndUpdate(
+                {_id: params.userId},
+                {$push: {thoughts: _id}},
+                {new: true}
+              );
+            })
+              .then((thought) => {
+                  if (!thought){
+                      res.status(404).json({message: "No user found with this id"});
+                      return;
+                  }
+                res.json(thought);
+            })   
           .catch((err) => res.status(500).json(err));
     },
     // Update thought
